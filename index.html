@@ -3,49 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Democratic Volume Control</title>
+    <title>Marble Malice: Multiplayer</title>
     <link rel="stylesheet" href="styles.css">
-    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
+    <script type="module" src="script.js"></script>
 </head>
 <body>
-    <div class="lobby-container">
-        <div id="lobby-screen">
-            <h2>Live Voting Lobby</h2>
-            <p id="status-text">Looking for real peers...</p>
-            <div id="live-counter">Active Citizens: <span>0</span></div>
-            <div class="user-grid" id="user-grid">
-                </div>
-            <p class="fine-print">A quorum of 5 real users is required to unlock voting.</p>
+    <div id="game-container">
+        <div id="lobby-layer">
+            <h1>Marble Malice</h1>
+            <div id="live-counter">Citizens Active: <span>0</span></div>
+            <p id="status-msg">Waiting for an opponent to join the sabotage...</p>
         </div>
 
-        <div id="voting-screen" class="hidden">
-            <div class="header-status">Live Consensus: <span id="current-vol">10</span>%</div>
-            <h2>Propose New Volume</h2>
-            <div class="slider-box">
-                <input type="range" id="volume-proposal" min="0" max="100" value="10">
-                <div class="val-display">Your Proposal: <span id="prop-val">10</span>%</div>
+        <div id="game-layer" class="hidden">
+            <div id="header">
+                <div id="mode-label">BUILD MODE: Slow them down!</div>
+                <div id="penalty-meter">Flow: <span id="flow-val">100</span>%</div>
             </div>
-            <button id="submit-vote">Submit to Global Committee</button>
             
-            <div id="polling-overlay" class="hidden">
-                <div class="spinner"></div>
-                <p>Consulting with <span class="live-count-poll">0</span> other users...</p>
-            </div>
+            <canvas id="gameCanvas" width="400" height="500"></canvas>
 
-            <div id="tax-authority" class="hidden">
-                <hr>
-                <div class="alert-box">
-                    <h3>⚠️ Voting Rights Suspended</h3>
-                    <div class="math-problem">
-                        <span id="math-q"></span> = <input type="number" id="math-ans" autofocus>
-                    </div>
-                    <button id="pay-tax">Pay Mental Tax</button>
-                </div>
+            <div id="controls">
+                <button class="tool-btn active" data-type="TAR">Place Tar (Slow)</button>
+                <button class="tool-btn" data-type="FAN">Place Fan (Push)</button>
+                <button id="ready-btn">Lock Board & Race</button>
             </div>
         </div>
-        <div id="feedback-node"></div>
+
+        <div id="overlay" class="hidden">
+            <h2 id="overlay-msg">SWAPPING BOARDS...</h2>
+        </div>
     </div>
-    <script type="module" src="script.js"></script>
 </body>
 </html>
