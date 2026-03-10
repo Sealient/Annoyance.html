@@ -5,14 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Marble Malice: Multiplayer</title>
     <link rel="stylesheet" href="styles.css">
-    <script type="module" src="script.js"></script>
 </head>
 <body>
     <div id="game-container">
         <div id="lobby-layer">
             <h1>Marble Malice</h1>
-            <div id="live-counter">Citizens Active: <span>0</span></div>
-            <p id="status-msg">Waiting for an opponent to join the sabotage...</p>
+            <div id="live-counter">Active Citizens: <span>0</span></div>
+            <div id="user-grid" class="user-grid"></div> <p id="status-msg">Waiting for an opponent to join the sabotage...</p>
         </div>
 
         <div id="game-layer" class="hidden">
@@ -24,8 +23,8 @@
             <canvas id="gameCanvas" width="400" height="500"></canvas>
 
             <div id="controls">
-                <button class="tool-btn active" data-type="TAR">Place Tar (Slow)</button>
-                <button class="tool-btn" data-type="FAN">Place Fan (Push)</button>
+                <button class="tool-btn active" data-type="TAR">Place Tar</button>
+                <button class="tool-btn" data-type="FAN">Place Fan</button>
                 <button id="ready-btn">Lock Board & Race</button>
             </div>
         </div>
@@ -34,5 +33,7 @@
             <h2 id="overlay-msg">SWAPPING BOARDS...</h2>
         </div>
     </div>
+
+    <script type="module" src="script.js"></script>
 </body>
 </html>
