@@ -1,16 +1,15 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
 import { getDatabase, ref, onValue, push, onDisconnect, set, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
 
-// Using your exact database URL provided
+// Updated to match your screenshot: annoyance-32e70
 const firebaseConfig = {
     apiKey: "AIzaSyCn7viRlWZWG9tPYZ8pHc74029KIDWCsqY",
-    authDomain: "annoya-33242.firebaseapp.com",
+    authDomain: "annoyance-32e70.firebaseapp.com",
     databaseURL: "https://annoyance-32e70-default-rtdb.firebaseio.com/",
-    projectId: "annoya-33242",
-    storageBucket: "annoya-33242.firebasestorage.app",
+    projectId: "annoyance-32e70",
+    storageBucket: "annoyance-32e70.firebasestorage.app",
     messagingSenderId: "427120642080",
-    appId: "1:427120642080:web:4793dccec5cc1523ca5445",
-    measurementId: "G-NGDS5F7GRD"
+    appId: "1:427120642080:web:4793dccec5cc1523ca5445"
 };
 
 const app = initializeApp(firebaseConfig);
@@ -136,3 +135,4 @@ document.getElementById('pay-tax').onclick = () => {
         generateMath();
     }
 };
+
