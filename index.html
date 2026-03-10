@@ -10,18 +10,16 @@
     <div id="game-container">
         <div id="lobby-layer">
             <h1>Marble Malice</h1>
-            <div id="live-counter">Active Citizens: <span>0</span></div>
-            <div id="user-grid" class="user-grid"></div> <p id="status-msg">Waiting for an opponent to join the sabotage...</p>
+            <div id="live-counter">Citizens Active: <span>0</span></div>
+            <div id="user-grid" class="user-grid"></div>
+            <p id="status-msg">Waiting for an opponent...</p>
         </div>
 
         <div id="game-layer" class="hidden">
             <div id="header">
                 <div id="mode-label">BUILD MODE: Slow them down!</div>
-                <div id="penalty-meter">Flow: <span id="flow-val">100</span>%</div>
             </div>
-            
             <canvas id="gameCanvas" width="400" height="500"></canvas>
-
             <div id="controls">
                 <button class="tool-btn active" data-type="TAR">Place Tar</button>
                 <button class="tool-btn" data-type="FAN">Place Fan</button>
@@ -33,7 +31,6 @@
             <h2 id="overlay-msg">SWAPPING BOARDS...</h2>
         </div>
     </div>
-
     <script type="module" src="script.js"></script>
 </body>
 </html>
