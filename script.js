@@ -1,10 +1,11 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
 import { getDatabase, ref, onValue, push, onDisconnect, set, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
 
-// 1. YOUR CONFIG (Already provided by you)
+// Using your exact database URL provided
 const firebaseConfig = {
     apiKey: "AIzaSyCn7viRlWZWG9tPYZ8pHc74029KIDWCsqY",
     authDomain: "annoya-33242.firebaseapp.com",
+    databaseURL: "https://annoyance-32e70-default-rtdb.firebaseio.com/",
     projectId: "annoya-33242",
     storageBucket: "annoya-33242.firebasestorage.app",
     messagingSenderId: "427120642080",
@@ -12,11 +13,10 @@ const firebaseConfig = {
     measurementId: "G-NGDS5F7GRD"
 };
 
-// 2. INITIALIZE
 const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 
-// Elements
+// DOM Elements
 const lobby = document.getElementById('lobby-screen');
 const voting = document.getElementById('voting-screen');
 const grid = document.getElementById('user-grid');
@@ -31,20 +31,18 @@ const counter = document.querySelector('#live-counter span');
 let currentAnswer = 0;
 let userCount = 0;
 
-// 3. REAL-TIME PRESENCE
+// --- REAL-TIME PRESENCE ---
 const connectionsRef = ref(db, 'connections');
 const connectedRef = ref(db, '.info/connected');
 
 onValue(connectedRef, (snap) => {
     if (snap.val() === true) {
         const myConRef = push(connectionsRef);
-        // Remove from DB when this user closes tab
         onDisconnect(myConRef).remove();
         set(myConRef, serverTimestamp());
     }
 });
 
-// Update the lobby when the connection list changes
 onValue(connectionsRef, (snap) => {
     const data = snap.val();
     userCount = data ? Object.keys(data).length : 0;
@@ -52,10 +50,10 @@ onValue(connectionsRef, (snap) => {
 });
 
 function updateLobbyUI(count) {
-    counter.innerText = count;
+    if (counter) counter.innerText = count;
     grid.innerHTML = '';
     
-    // We require 3 users to unlock
+    // Require 3 users to unlock
     const displayCount = Math.max(count, 5);
     for (let i = 0; i < displayCount; i++) {
         const dot = document.createElement('div');
@@ -77,7 +75,7 @@ function updateLobbyUI(count) {
     }
 }
 
-// 4. THE VOTING SYSTEM
+// --- VOTING LOGIC ---
 slider.oninput = () => {
     propDisplay.innerText = slider.value;
 };
@@ -86,12 +84,11 @@ document.getElementById('submit-vote').onclick = () => {
     const userRequest = parseInt(slider.value);
     pollOverlay.classList.remove('hidden');
     feedback.innerText = "";
-    document.querySelector('.live-count-poll').innerText = userCount;
 
     setTimeout(() => {
         pollOverlay.classList.add('hidden');
         
-        // Spiteful Logic
+        // Logical Spite: Force a consensus opposite of user request
         let consensus = userRequest > 50 ? Math.floor(Math.random() * 10) : Math.floor(Math.random() * 10) + 90;
 
         currentVolDisplay.innerText = consensus;
@@ -108,7 +105,7 @@ document.getElementById('submit-vote').onclick = () => {
     }, 3000);
 };
 
-// 5. THE MATH TAX
+// --- MATH TAX ---
 function checkBanStatus() {
     if (localStorage.getItem('volume_banned') === 'true') {
         document.getElementById('submit-vote').classList.add('hidden');
